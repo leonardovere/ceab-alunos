@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    data-bs-theme="dark">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="UTF-8">
@@ -9,47 +8,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <nav class="navbar bg-body-tertiary sticky-top">
+        <nav class="navbar sticky-top" style="background-color: #110d76;" data-bs-theme="dark">
             <div class="container-fluid d-flex justify-content-start">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <a class="navbar-brand" href="#">Registro Online CEAB</a>
+                <a class="navbar-brand m-2" href="#">Registro Online CEAB</a>
 
                 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                     aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Registro Online CEAB</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    Dropdown
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </li>
+                            <ul th:insert="~{fragments/menu :: menu}"></ul>
                         </ul>
                     </div>
                 </div>
@@ -57,29 +38,15 @@
         </nav>
     </header>
 
-    <div class="container">
-        <div layout:fragment="content">
-            <h1>Teste</h1>
+    <main>
+        <div class="container">
+            <div layout:fragment="content"></div>
 
-            <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis doloribus dolore dolor ut
-                    doloremque nesciunt deleniti incidunt eaque soluta, totam vel magni quis? Incidunt explicabo natus
-                    commodi quibusdam aperiam fugiat.</span><span>Animi nostrum maxime cum corporis tempore eligendi
-                    esse eos nam reprehenderit, placeat ipsum autem, possimus harum exercitationem dolor corrupti
-                    laboriosam eveniet sit ducimus? Aliquam officiis voluptatibus dignissimos vel natus
-                    dolorem.</span><span>Aspernatur quo praesentium non aperiam rerum architecto laborum dolores omnis
-                    voluptate corrupti. Aut, consectetur suscipit itaque quam saepe corrupti ratione! Quis, animi
-                    ducimus excepturi nihil laborum veritatis facilis doloribus ab.</span><span>Voluptatem beatae
-                    veritatis dicta ea, culpa excepturi rerum nam quas, veniam in officiis eaque reprehenderit unde at
-                    eos repudiandae facere nesciunt neque! Laudantium ipsa neque unde animi soluta eligendi
-                    doloribus?</span><span>Placeat laborum modi quas molestiae voluptatum fuga reiciendis beatae,
-                    consectetur nesciunt eius sed sit, ipsa distinctio aliquam quis! Facere laboriosam minus architecto
-                    est inventore quis, commodi praesentium odit voluptate saepe.</span></p>
+            <footer>
+                &copy; 3°DS - Todos os direitos reservados - 2025
+            </footer>
         </div>
-
-        <footer>
-            &copy; Copyright - 2025
-        </footer>
-    </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
