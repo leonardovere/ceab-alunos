@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <aside>
+        <nav th:fragment="sidebar" style="height: 100%;">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="height: 100%;">
+                <a th:href="@{/}"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <img th:src="@{/images/logo-ceab.png}" alt="Logo do Colégio Estadual Arnaldo Busato" class="me-2">
+                    <span class="fs-5 fw-semibold">Registro Online CEAB</span>
+                </a>
+
+                <hr>
+
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a th:href="@{/}" class="nav-link"
+                            th:classappend="${menuAtivo == 'index' ? 'active' : 'link-body-emphasis'}"
+                            aria-current="page">
+                            <i class="bi bi-house-fill"></i>
+                            <span class="ms-1">Página Inicial</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/turmas}" class="nav-link"
+                            th:classappend="${menuAtivo == 'turmas' ? 'active' : 'link-body-emphasis'}">
+                            <i class="bi bi-card-list"></i>
+                            <span class="ms-1">Turmas</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/disciplinas}" class="nav-link"
+                            th:classappend="${menuAtivo == 'disciplinas' ? 'active' : 'link-body-emphasis'}">
+                            <i class="bi bi-book"></i>
+                            <span class="ms-1">Disciplinas</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/conteudos}" class="nav-link"
+                            th:classappend="${menuAtivo == 'conteudos' ? 'active' : 'link-body-emphasis'}">
+                            <i class="bi bi-journal-text"></i>
+                            <span class="ms-1">Conteúdos</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/professores}" class="nav-link"
+                            th:classappend="${menuAtivo == 'professores' ? 'active' : 'link-body-emphasis'}">
+                            <i class="bi bi-person-lines-fill"></i>
+                            <span class="ms-1">Professores</span>
+                        </a>
+                    </li>
+
+                    <li class="mb-1">
+                        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0"
+                            data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
+                            <i class="bi bi-mortarboard"></i>
+                            <span class="ms-1">Alunos</span>
+                        </button>
+                        <div class="collapse show" id="dashboard-collapse">
+                            <ul class="btn-toggle-nav list-unstyled nav nav-pills flex-column mb-auto">
+                                <li class="nav-item">
+                                    <a th:href="@{/alunos}" class="nav-link p-2"
+                                        th:classappend="${menuAtivo == 'alunos' ? 'active' : 'link-body-emphasis'}">
+                                        <i class="bi bi-mortarboard"></i>
+                                        <span class="ms-1">Pesquisa de Alunos</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a th:href="@{/frequencia}" class="nav-link p-2"
+                                        th:classappend="${menuAtivo == 'frequencia' ? 'active' : 'link-body-emphasis'}">
+                                        <i class="bi bi-clipboard-check"></i>
+                                        <span class="ms-1">Frequência</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                     <a th:href="@{/avaliacoes}" class="nav-link p-2"
+                                        th:classappend="${menuAtivo == 'avaliacoes' ? 'active' : 'link-body-emphasis'}">
+                                        <i class="bi bi-pencil-square"></i>
+                                        <span class="ms-1">Avaliações</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+        </nav>
+    </aside>
+</body>
+
+</html>
