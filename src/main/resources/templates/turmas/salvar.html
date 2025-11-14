@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${turma.id != null ? 'Editar Turma' : 'Nova Turma'}"></title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 th:text="${turma.id != null ? 'Editar Turma' : 'Nova Turma'}"></h2>
+            <a th:href="@{/turmas}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+        <div th:if="${erro}" class="alert alert-danger alert-dismissible fade show mt-3">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            <span th:text="${erro}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <form th:action="@{/turmas/salvar}" th:object="${turma}" accept-charset="UTF-8" method="post"
+            class="needs-validation" novalidate>
+            <div class="row mb-3">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="col-md-2">
+                    <label for="ano" class="form-label">Ano</label>
+                    <input type="number" th:field="*{ano}" class="form-control" min="1" max="9" required>
+                    <div class="text-danger small" th:if="${#fields.hasErrors('ano')}" th:errors="*{ano}"></div>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="identificacao" class="form-label">Identificação</label>
+                    <select th:field="*{identificacao}" class="form-select">
+                        <option value="" disabled selected>Selecione...</option>
+                        <option th:each="i : ${T(com.example.demo.model.Identificacao).values()}" th:value="${i}"
+                            th:text="${i}">
+                        </option>
+                    </select>
+                    <div class="text-danger small" th:errors="*{identificacao}"></div>
+                </div>
+
+                <div class="col-md-2">
+                    <label for="tipo" class="form-label">Tipo da Turma</label>
+                    <select th:field="*{tipo}" class="form-select">
+                        <option value="" disabled selected>Selecione...</option>
+                        <option th:each="t : ${T(com.example.demo.model.TipoEnsino).values()}" th:value="${t}"
+                            th:text="${t.descricao}">
+                        </option>
+                    </select>
+                    <div class="text-danger small" th:errors="*{tipo}"></div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="observacoes" class="form-label">Observações</label>
+                <textarea th:field="*{observacao}" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-save"></i> Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

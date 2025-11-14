@@ -17,7 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.addDialect(new LayoutDialect()); // I added it again. Very important
+        templateEngine.addDialect(new LayoutDialect()); 
         templateEngine.setTemplateResolver(thymeleafTemplateResolver());
         return templateEngine;
     }

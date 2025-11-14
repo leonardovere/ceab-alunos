@@ -4,10 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import lombok.Getter;
-
 @Controller
-@Getter
 public class MenuController {
     
     @GetMapping("/")
@@ -17,52 +14,38 @@ public class MenuController {
         return "index";
     }
     
-    @GetMapping("/turmas")
-    public String turmas(Model model) {
-        model.addAttribute("menuAtivo", "turmas");
-        
-        return "pesquisa-turmas";
-    }
-    
-    @GetMapping("/disciplinas")
-    public String disciplinas(Model model) {
-        model.addAttribute("menuAtivo", "disciplinas");
-        
-        return "pesquisa-disciplinas";
-    }
-    
-    @GetMapping("/conteudos")
+    @GetMapping("/listar-conteudos")
     public String conteudos(Model model) {
         model.addAttribute("menuAtivo", "conteudos");
         
         return "conteudos/pesquisa-conteudos";
     }
     
-    @GetMapping("/professores")
+    @GetMapping("/listar-professores")
     public String professores(Model model) {
         model.addAttribute("menuAtivo", "professores");
         
         return "professores/pesquisa-professores";
     }
-    
-    @GetMapping("/alunos")
-    public String alunos(Model model) {
-        model.addAttribute("menuAtivo", "alunos");
+
+    @GetMapping("/listar-aulas")
+    public String aulas(Model model) {
+        model.addAttribute("menuAtivo", "aulas");
         
-        return "alunos/pesquisa-alunos";
+        return "diario/pesquisa-aulas";
     }
     
-    @GetMapping("/frequencia")
+    @GetMapping("/listar-frequencia")
     public String frequencia(Model model) {
         model.addAttribute("menuAtivo", "frequencia");
         
-        return "alunos/pesquisa-frequencia";
+        return "diario/pesquisa-frequencia";
     }
     
-    @GetMapping("/avaliacoes")
+    @GetMapping("/listar-avaliacoes")
     public String avaliacoes(Model model) {
         model.addAttribute("menuAtivo", "avaliacoes");
         
-        return "alunos/pesquisa-avaliacoes";
+        return "diario/pesquisa-avaliacoes";
     }
 }

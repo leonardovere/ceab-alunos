@@ -9,8 +9,8 @@
 
 <body>
     <aside>
-        <nav th:fragment="sidebar" style="height: 100%;">
-            <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="height: 100%;">
+        <nav th:fragment="sidebar" class="position-sticky top-0 vh-100">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary vh-100">
                 <a th:href="@{/}"
                     class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <img th:src="@{/images/logo-ceab.png}" alt="Logo do Colégio Estadual Arnaldo Busato" class="me-2">
@@ -44,7 +44,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/conteudos}" class="nav-link"
+                        <a th:href="@{/listar-conteudos}" class="nav-link"
                             th:classappend="${menuAtivo == 'conteudos' ? 'active' : 'link-body-emphasis'}">
                             <i class="bi bi-journal-text"></i>
                             <span class="ms-1">Conteúdos</span>
@@ -52,37 +52,45 @@
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/professores}" class="nav-link"
+                        <a th:href="@{/listar-professores}" class="nav-link"
                             th:classappend="${menuAtivo == 'professores' ? 'active' : 'link-body-emphasis'}">
                             <i class="bi bi-person-lines-fill"></i>
                             <span class="ms-1">Professores</span>
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a th:href="@{/alunos}" class="nav-link"
+                            th:classappend="${menuAtivo == 'alunos' ? 'active' : 'link-body-emphasis'}">
+                            <i class="bi bi-mortarboard"></i>
+                            <span class="ms-1">Alunos</span>
+                        </a>
+                    </li>
+
                     <li class="mb-1">
                         <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0"
                             data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
-                            <i class="bi bi-mortarboard"></i>
-                            <span class="ms-1">Alunos</span>
+                            <i class="bi bi-calendar-fill"></i>
+                            <span class="ms-1">Registro Diário</span>
                         </button>
                         <div class="collapse show" id="dashboard-collapse">
                             <ul class="btn-toggle-nav list-unstyled nav nav-pills flex-column mb-auto">
                                 <li class="nav-item">
-                                    <a th:href="@{/alunos}" class="nav-link p-2"
-                                        th:classappend="${menuAtivo == 'alunos' ? 'active' : 'link-body-emphasis'}">
-                                        <i class="bi bi-mortarboard"></i>
-                                        <span class="ms-1">Pesquisa de Alunos</span>
+                                    <a th:href="@{/listar-aulas}" class="nav-link p-2"
+                                        th:classappend="${menuAtivo == 'aulas' ? 'active' : 'link-body-emphasis'}">
+                                        <i class="bi bi-easel2"></i>
+                                        <span class="ms-1">Aulas</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a th:href="@{/frequencia}" class="nav-link p-2"
+                                    <a th:href="@{/listar-frequencia}" class="nav-link p-2"
                                         th:classappend="${menuAtivo == 'frequencia' ? 'active' : 'link-body-emphasis'}">
                                         <i class="bi bi-clipboard-check"></i>
                                         <span class="ms-1">Frequência</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                     <a th:href="@{/avaliacoes}" class="nav-link p-2"
+                                     <a th:href="@{/listar-avaliacoes}" class="nav-link p-2"
                                         th:classappend="${menuAtivo == 'avaliacoes' ? 'active' : 'link-body-emphasis'}">
                                         <i class="bi bi-pencil-square"></i>
                                         <span class="ms-1">Avaliações</span>
@@ -92,7 +100,10 @@
                         </div>
                     </li>
                 </ul>
+
                 <hr>
+
+                <small class="text-center">&copy; 3°DS - Todos os direitos reservados - 2025</small>
             </div>
         </nav>
     </aside>

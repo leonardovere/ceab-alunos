@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turmas</title>
+</head>
+
+<body>
+    <div class="container">
+        <section layout:fragment="content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Turmas</h2>
+                <a th:href="@{/turmas/nova}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Nova Turma
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped align-middle table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Ano</th>
+                            <th>Identificação</th>
+                            <th>Ensino</th>
+                            <th>Observações</th>
+                            <th class="text-center" style="width: 120px;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="turma : ${turmas}">
+                            <td th:text="${turma.id}"></td>
+                            <td th:text="${turma.ano + '°'}"></td>
+                            <td th:text="${turma.identificacao}"></td>
+                            <td th:text="${turma.tipo.descricao}"></td>
+                            <td th:text="${turma.observacao}"></td>
+                            <td class="text-center">
+                                <a th:href="@{'/turmas/editar/' + ${turma.id}}" class="btn btn-sm btn-primary m-1"
+                                    title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+
+                                <button type="button" class="btn btn-sm btn-danger m-1" data-bs-toggle="modal"
+                                    th:data-bs-target="'#confirmModal' + ${turma.id}" title="Remover">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+
+                                <div class="modal fade" th:id="'confirmModal' + ${turma.id}" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger text-white">
+                                                <h5 class="modal-title">Confirmar exclusão</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Fechar"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Tem certeza que deseja excluir a turma
+                                                <strong th:text="${turma.descricao}"></strong>?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancelar</button>
+                                                <form th:action="@{'/turmas/remover/' + ${turma.id}}" method="post">
+                                                    <button type="submit" class="btn btn-danger">Remover</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(turmas)}">
+                            <td colspan="6" class="text-center text-muted">Nenhuma turma cadastrada.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

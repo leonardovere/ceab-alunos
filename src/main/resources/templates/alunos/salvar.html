@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${aluno.id != null ? 'Editar Aluno' : 'Nova Aluno'}"></title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 th:text="${aluno.id != null ? 'Editar Aluno' : 'Novo Aluno'}"></h2>
+            <a th:href="@{/alunos}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+        <form th:action="@{/alunos/salvar}" th:object="${aluno}" accept-charset="UTF-8" method="post" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="col-md-6">
+                <label class="form-label">Nome</label>
+                <input type="text" class="form-control" th:field="*{nome}" required />
+                <div class="text-danger small" th:errors="*{nome}"></div>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Sexo</label>
+                <select class="form-select" th:field="*{sexo}" required>
+                    <option value="">Selecione...</option>
+                    <option th:each="s : ${T(com.example.demo.model.Sexo).values()}" th:value="${s}"
+                        th:text="${s.descricao}">
+                    </option>
+                </select>
+                <div class="text-danger small" th:errors="*{sexo}"></div>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Data de Nascimento</label>
+                <input type="date" class="form-control" th:field="*{dataNascimento}" required />
+                <div class="text-danger small" th:errors="*{dataNascimento}"></div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">E-mail</label>
+                <input type="email" class="form-control" th:field="*{email}" required />
+                <div class="text-danger small" th:errors="*{email}"></div>
+            </div>
+            
+            <div class="col-md-3">
+                <label class="form-label">Celular</label>
+                <input type="text" class="form-control" th:field="*{celular}" required />
+                <div class="text-danger small" th:errors="*{celular}"></div>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">CPF</label>
+                <input type="text" class="form-control" th:field="*{cpf}" maxlength="14" />
+                <div class="text-danger small" th:errors="*{cpf}"></div>
+            </div>
+
+           <div class="col-md-6">
+                <label for="turma" class="form-label">Turma</label>
+                <select id="turma" class="form-select" th:field="*{turma}" required>
+                    <option value="" disabled selected>Selecione uma turma...</option>
+
+                    <optgroup th:each="tipo : ${T(com.example.demo.model.TipoEnsino).values()}"
+                        th:label="${tipo.descricao}">
+                        <option th:each="t : ${turmas}" th:if="${t.tipo == tipo}" th:value="${t.id}"
+                            th:text="${t.ano + 'º ' + t.identificacao + ' - ' + t.observacao}">
+                        </option>
+                    </optgroup>
+                </select>
+                <div class="text-danger small" th:errors="*{turma}"></div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-save"></i> Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${disciplina.id != null ? 'Editar Disciplina' : 'Nova Disciplina'}"></title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 th:text="${disciplina.id != null ? 'Editar disciplina' : 'Novo disciplina'}"></h2>
+            <a th:href="@{/disciplinas}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+        <form th:action="@{/disciplinas/salvar}" th:object="${disciplina}" accept-charset="UTF-8" method="post"
+            class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="col-md-8">
+                <label for="nome" class="form-label">Nome da Disciplina</label>
+                <input type="text" id="nome" class="form-control" th:field="*{nome}" required maxlength="255">
+                <div class="text-danger small" th:errors="*{nome}"></div>
+            </div>
+
+            <div class="col-md-4">
+                <label for="cargaHoraria" class="form-label">Carga Horária (h)</label>
+                <input type="number" id="cargaHoraria" class="form-control" th:field="*{cargaHoraria}" min="1" max="300"
+                    required>
+                <div class="text-danger small" th:errors="*{cargaHoraria}"></div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="turma" class="form-label">Turma</label>
+                <select id="turma" class="form-select" th:field="*{turma}" required>
+                    <option value="" disabled selected>Selecione uma turma...</option>
+
+                    <optgroup th:each="tipo : ${T(com.example.demo.model.TipoEnsino).values()}"
+                        th:label="${tipo.descricao}">
+                        <option th:each="t : ${turmas}" th:if="${t.tipo == tipo}" th:value="${t.id}"
+                            th:text="${t.ano + 'º ' + t.identificacao + ' - ' + t.observacao}">
+                        </option>
+                    </optgroup>
+                </select>
+                <div class="text-danger small" th:errors="*{turma}"></div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-save"></i> Salvar
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

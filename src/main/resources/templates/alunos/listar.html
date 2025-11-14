@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{template}">
+
+<head>
+    <title>Alunos</title>
+</head>
+
+<body>
+    <div class="container">
+        <section layout:fragment="content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Alunos</h2>
+                <a th:href="@{/alunos/novo}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Novo Aluno
+                </a>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-striped align-middle table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Sexo</th>
+                            <th>Idade</th>
+                            <th>Turma</th>
+                            <th>Email</th>
+                            <th>Celular</th>
+                            <th>CPF</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="aluno : ${alunos}">
+                            <td th:text="${aluno.id}"></td>
+                            <td th:text="${aluno.nome}"></td>
+                            <td th:text="${aluno.sexo.descricao}"></td>
+                            <td th:text="${aluno.idade + ' anos'}"></td>
+                            <td th:text="${aluno.turma.descricao}"></td>
+                            <td th:text="${aluno.email}"></td>
+                            <td th:text="${aluno.celular}"></td>
+                            <td th:text="${aluno.cpf}"></td>
+                            <td class="text-center">
+                                <a th:href="@{'/alunos/editar/' + ${aluno.id}}" class="btn btn-sm btn-primary m-1">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <button type="button" class="btn btn-sm btn-danger m-1" data-bs-toggle="modal"
+                                    th:data-bs-target="'#modalExcluir' + ${aluno.id}">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+
+                                <!-- Modal de Confirmação -->
+                                <div class="modal fade" th:id="'modalExcluir' + ${aluno.id}" tabindex="-1"
+                                    aria-labelledby="modalExcluirLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-danger text-white">
+                                                <h5 class="modal-title" id="modalExcluirLabel">Confirmar Exclusão</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Fechar"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Tem certeza que deseja excluir o aluno
+                                                <strong th:text="${aluno.nome}"></strong>?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cancelar</button>
+                                                <form th:action="@{'/alunos/remover/' + ${aluno.id}}" method="post">
+                                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fim do Modal -->
+                            </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(alunos)}">
+                            <td colspan="9" class="text-center text-muted">Nenhuma aluno cadastrada.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
